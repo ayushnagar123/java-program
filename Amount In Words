@@ -1,0 +1,60 @@
+import java.util.*;
+class Amt_words
+{
+  public static void main()
+  {
+    int n , c=0,p,x,r;
+    string fin="";
+    string digit[]={"","One","Two","Three","Four","Five","Six","Seven","Eight","Nine"};
+    string tens[]= {"","","Twenty","Thirty","Fourty","Fifty","Sixty","Seventy","Eighty","Ninety"};
+    string hund[]= {"Crore","Lakhs","Thousand","Hundred"};
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Enter a no:- ");
+    n=sc.nextInt()
+    p=n;
+
+    while(p>0)
+    {
+        c++;
+        p/=10;
+    }
+
+    while(c>3)
+    {
+        if(c%2!=0)
+            c-=2;
+        else
+            c-=1;
+        x = (int)(Math.pow(10,c));
+        r = n/x;
+        n = n%x;
+        if(r>20)
+            fin+=tens[r/10]+" "+digit[r%10];
+        else
+            fin+= digit[r]+" ";
+        if(c==7)
+            fin+=hund[0]+" ";
+        if(c==5)
+            fin+= hund[1]+" ";
+        if(c==3)
+            fin+= hund[2]+" ";
+        
+    }
+
+    if(c==3)
+    {
+        r=n/100;
+        n=n%100;
+        if(r!=0)
+        {
+            fin += digit[r]+" " +hund[3]+" ";
+        }
+
+    }
+    if(n>19)
+        fin+= tens[n/10]+" "+digit[n%10];
+    else
+        fin+= digit[n];
+    printf("The given no "+n+"'s equivalent is:- "+ fin);
+  }
+}
